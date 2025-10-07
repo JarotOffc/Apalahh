@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MyStore - Toko Online Terpercaya</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Reset dan Styling Dasar */
+        /* Reset & Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -14,7 +15,7 @@
         }
         
         body {
-            background-color: #f5f5f5;
+            background-color: #f8f9fa;
             color: #333;
             line-height: 1.6;
         }
@@ -30,19 +31,12 @@
             padding: 0 15px;
         }
         
-        /* Header */
-        header {
-            background-color: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
+        /* Header Styles */
         .header-top {
             background-color: #f8f8f8;
             padding: 8px 0;
             font-size: 14px;
+            border-bottom: 1px solid #eee;
         }
         
         .header-top .container {
@@ -51,7 +45,9 @@
         }
         
         .header-main {
+            background-color: white;
             padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         
         .header-main .container {
@@ -61,9 +57,13 @@
         }
         
         .logo {
-            font-size: 24px;
+            font-size: 28px;
             font-weight: bold;
             color: #e74c3c;
+        }
+        
+        .logo span {
+            color: #333;
         }
         
         .search-bar {
@@ -75,10 +75,11 @@
         
         .search-bar input {
             width: 100%;
-            padding: 10px 15px;
+            padding: 12px 20px;
             border: 1px solid #ddd;
             border-radius: 30px;
             outline: none;
+            font-size: 15px;
         }
         
         .search-bar button {
@@ -88,9 +89,10 @@
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 5px 15px;
+            padding: 7px 20px;
             border-radius: 30px;
             cursor: pointer;
+            font-weight: 500;
         }
         
         .header-actions {
@@ -104,6 +106,11 @@
             flex-direction: column;
             align-items: center;
             font-size: 12px;
+            transition: color 0.3s;
+        }
+        
+        .header-actions a:hover {
+            color: #e74c3c;
         }
         
         .header-actions i {
@@ -111,10 +118,29 @@
             margin-bottom: 3px;
         }
         
+        .cart-count {
+            background: #e74c3c;
+            color: white;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: absolute;
+            top: -5px;
+            right: -5px;
+        }
+        
+        .cart-icon {
+            position: relative;
+        }
+        
         /* Navigation */
         nav {
             background-color: #e74c3c;
-            padding: 10px 0;
+            padding: 12px 0;
         }
         
         nav ul {
@@ -128,6 +154,7 @@
             font-weight: 500;
             padding: 5px 10px;
             transition: all 0.3s;
+            font-size: 15px;
         }
         
         nav a:hover {
@@ -135,26 +162,49 @@
             border-radius: 4px;
         }
         
-        /* Hero Section */
-        .hero {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1200x400');
-            background-size: cover;
-            background-position: center;
-            color: white;
-            padding: 80px 0;
-            text-align: center;
+        /* Hero Slider */
+        .hero-slider {
+            position: relative;
+            height: 400px;
+            overflow: hidden;
             margin-bottom: 30px;
+            border-radius: 8px;
         }
         
-        .hero h1 {
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1s ease;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .slide.active {
+            opacity: 1;
+        }
+        
+        .slide-content {
+            position: absolute;
+            top: 50%;
+            left: 50px;
+            transform: translateY(-50%);
+            color: white;
+            max-width: 500px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+        
+        .slide-content h2 {
             font-size: 36px;
             margin-bottom: 15px;
         }
         
-        .hero p {
+        .slide-content p {
             font-size: 18px;
-            max-width: 700px;
-            margin: 0 auto 25px;
+            margin-bottom: 25px;
         }
         
         .btn {
@@ -172,11 +222,13 @@
             transform: translateY(-3px);
         }
         
-        /* Kategori */
+        /* Categories */
         .section-title {
-            text-align: center;
             margin: 40px 0 20px;
             position: relative;
+            padding-bottom: 10px;
+            font-size: 24px;
+            font-weight: 600;
         }
         
         .section-title:after {
@@ -185,7 +237,7 @@
             width: 50px;
             height: 3px;
             background: #e74c3c;
-            margin: 10px auto;
+            margin-top: 10px;
         }
         
         .categories {
@@ -198,15 +250,16 @@
         .category {
             background: white;
             border-radius: 8px;
-            padding: 15px;
+            padding: 20px 15px;
             text-align: center;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
             transition: all 0.3s;
+            border: 1px solid #f0f0f0;
         }
         
         .category:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .category i {
@@ -215,7 +268,12 @@
             margin-bottom: 10px;
         }
         
-        /* Produk */
+        .category h3 {
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        /* Products */
         .products {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -227,13 +285,14 @@
             background: white;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
             transition: all 0.3s;
+            border: 1px solid #f0f0f0;
         }
         
         .product:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
         }
         
         .product-img {
@@ -243,12 +302,30 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
         
         .product-img img {
             max-width: 100%;
             max-height: 100%;
             object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .product:hover .product-img img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
         }
         
         .product-info {
@@ -256,10 +333,11 @@
         }
         
         .product-title {
-            font-weight: 600;
+            font-weight: 500;
             margin-bottom: 10px;
             height: 40px;
             overflow: hidden;
+            font-size: 15px;
         }
         
         .product-price {
@@ -269,9 +347,18 @@
             margin-bottom: 10px;
         }
         
+        .product-price .old-price {
+            color: #999;
+            text-decoration: line-through;
+            font-size: 14px;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+        
         .product-rating {
             color: #ffc107;
             margin-bottom: 10px;
+            font-size: 14px;
         }
         
         .product-actions {
@@ -287,17 +374,36 @@
             border-radius: 4px;
             cursor: pointer;
             transition: all 0.3s;
+            font-weight: 500;
+            flex: 1;
+            margin-right: 5px;
         }
         
         .add-to-cart:hover {
             background: #c0392b;
         }
         
+        .wishlist-btn {
+            background: #f8f8f8;
+            color: #666;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .wishlist-btn:hover {
+            background: #eee;
+            color: #e74c3c;
+        }
+        
         /* Footer */
         footer {
-            background: #333;
-            color: #fff;
-            padding: 40px 0 20px;
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 50px 0 20px;
+            margin-top: 50px;
         }
         
         .footer-content {
@@ -312,6 +418,7 @@
             margin-bottom: 20px;
             position: relative;
             padding-bottom: 10px;
+            color: white;
         }
         
         .footer-column h3:after {
@@ -324,12 +431,24 @@
             background: #e74c3c;
         }
         
+        .footer-column p {
+            margin-bottom: 15px;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+        
         .footer-column ul {
             list-style: none;
         }
         
         .footer-column ul li {
             margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a {
+            color: #bdc3c7;
+            transition: color 0.3s;
+            font-size: 14px;
         }
         
         .footer-column ul li a:hover {
@@ -351,10 +470,12 @@
             background: rgba(255,255,255,0.1);
             border-radius: 50%;
             transition: all 0.3s;
+            color: #bdc3c7;
         }
         
         .social-icons a:hover {
             background: #e74c3c;
+            color: white;
             transform: translateY(-3px);
         }
         
@@ -363,6 +484,7 @@
             padding-top: 20px;
             border-top: 1px solid rgba(255,255,255,0.1);
             font-size: 14px;
+            color: #bdc3c7;
         }
         
         /* Responsive */
@@ -375,27 +497,47 @@
             .search-bar {
                 margin: 10px 0;
                 max-width: 100%;
+                order: 3;
+                width: 100%;
+            }
+            
+            .header-actions {
+                gap: 15px;
             }
             
             nav ul {
                 flex-wrap: wrap;
                 gap: 10px;
+                justify-content: center;
             }
             
-            .hero {
-                padding: 50px 0;
+            .hero-slider {
+                height: 300px;
             }
             
-            .hero h1 {
-                font-size: 28px;
+            .slide-content {
+                left: 20px;
+                max-width: 80%;
             }
             
-            .hero p {
+            .slide-content h2 {
+                font-size: 24px;
+            }
+            
+            .slide-content p {
                 font-size: 16px;
+            }
+            
+            .categories {
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            }
+            
+            .products {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 15px;
             }
         }
     </style>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Header -->
@@ -406,7 +548,7 @@
                     <span><i class="fas fa-phone"></i> +62 123 4567 890</span>
                 </div>
                 <div class="promo-text">
-                    <span>Gratis Ongkir untuk Pembelian di Atas Rp 100.000</span>
+                    <span>🛵 Gratis Ongkir untuk Pembelian di Atas Rp 100.000</span>
                 </div>
             </div>
         </div>
@@ -414,12 +556,12 @@
         <div class="header-main">
             <div class="container">
                 <div class="logo">
-                    <a href="#">MyStore</a>
+                    <a href="#">My<span>Store</span></a>
                 </div>
                 
                 <div class="search-bar">
                     <input type="text" placeholder="Cari produk...">
-                    <button><i class="fas fa-search"></i></button>
+                    <button><i class="fas fa-search"></i> Cari</button>
                 </div>
                 
                 <div class="header-actions">
@@ -431,9 +573,10 @@
                         <i class="fas fa-heart"></i>
                         <span>Favorit</span>
                     </a>
-                    <a href="#">
+                    <a href="#" class="cart-icon">
                         <i class="fas fa-shopping-cart"></i>
                         <span>Keranjang</span>
+                        <span class="cart-count">3</span>
                     </a>
                 </div>
             </div>
@@ -444,25 +587,44 @@
     <nav>
         <div class="container">
             <ul>
-                <li><a href="#">Beranda</a></li>
-                <li><a href="#">Produk</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Beranda</a></li>
+                <li><a href="#">Semua Produk</a></li>
                 <li><a href="#">Kategori</a></li>
                 <li><a href="#">Promo</a></li>
                 <li><a href="#">Terbaru</a></li>
+                <li><a href="#">Terlaris</a></li>
                 <li><a href="#">Tentang Kami</a></li>
                 <li><a href="#">Kontak</a></li>
             </ul>
         </div>
     </nav>
     
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <h1>Selamat Datang di MyStore</h1>
-            <p>Temukan produk terbaik dengan harga terjangkau hanya di toko online kami. Berbagai pilihan produk dengan kualitas terjamin.</p>
-            <a href="#" class="btn">Belanja Sekarang</a>
+    <!-- Hero Slider -->
+    <div class="container">
+        <div class="hero-slider">
+            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1607082350899-7e105aa886ae?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-content">
+                    <h2>Sale Besar-Besaran!</h2>
+                    <p>Dapatkan diskon hingga 70% untuk berbagai produk pilihan. Buruan sebelum kehabisan!</p>
+                    <a href="#" class="btn">Belanja Sekarang</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-content">
+                    <h2>Produk Elektronik Terbaru</h2>
+                    <p>Temukan gadget dan elektronik terkini dengan harga terbaik hanya di toko kami.</p>
+                    <a href="#" class="btn">Lihat Koleksi</a>
+                </div>
+            </div>
+            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80');">
+                <div class="slide-content">
+                    <h2>Fashion Trend Musim Ini</h2>
+                    <p>Update gaya kamu dengan koleksi fashion terbaru dari brand ternama.</p>
+                    <a href="#" class="btn">Jelajahi Fashion</a>
+                </div>
+            </div>
         </div>
-    </section>
+    </div>
     
     <!-- Main Content -->
     <main class="container">
@@ -493,6 +655,14 @@
                 <i class="fas fa-heartbeat"></i>
                 <h3>Kesehatan</h3>
             </div>
+            <div class="category">
+                <i class="fas fa-baby"></i>
+                <h3>Bayi & Anak</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-futbol"></i>
+                <h3>Olahraga</h3>
+            </div>
         </div>
         
         <!-- Produk Terbaru -->
@@ -500,30 +670,34 @@
         <div class="products">
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 1">
+                    <div class="product-badge">NEW</div>
+                    <img src="https://images.unsplash.com/photo-1592899677977-9c10ca588bbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Smartphone">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Smartphone XYZ 128GB RAM 6GB</h3>
-                    <div class="product-price">Rp 2.499.000</div>
+                    <h3 class="product-title">Smartphone XYZ 128GB RAM 6GB Kamera 64MP</h3>
+                    <div class="product-price">Rp 2.499.000 <span class="old-price">Rp 2.999.000</span></div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
+                        <span>(128)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
             
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 2">
+                    <div class="product-badge">HOT</div>
+                    <img src="https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Sepatu">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Sepatu Sneakers Casual Pria</h3>
+                    <h3 class="product-title">Sepatu Sneakers Casual Pria Original</h3>
                     <div class="product-price">Rp 299.000</div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
@@ -531,39 +705,43 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="far fa-star"></i>
+                        <span>(64)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
             
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 3">
+                    <img src="https://images.unsplash.com/photo-1577937927131-a4d5d1bf3076?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Blender">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Blender Multifungsi 5in1</h3>
-                    <div class="product-price">Rp 450.000</div>
+                    <h3 class="product-title">Blender Multifungsi 5in1 2L Garansi Resmi</h3>
+                    <div class="product-price">Rp 450.000 <span class="old-price">Rp 550.000</span></div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
+                        <span>(89)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
             
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 4">
+                    <img src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Tas">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Tas Ransel Wanita Trendy</h3>
+                    <h3 class="product-title">Tas Ransel Wanita Trendy Anti Air</h3>
                     <div class="product-price">Rp 189.000</div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
@@ -571,9 +749,11 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
                         <i class="far fa-star"></i>
+                        <span>(42)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
@@ -584,30 +764,33 @@
         <div class="products">
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 5">
+                    <div class="product-badge">DISKON 20%</div>
+                    <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Headphone">
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">Headphone Wireless Noise Cancelling</h3>
-                    <div class="product-price">Rp 799.000</div>
+                    <div class="product-price">Rp 799.000 <span class="old-price">Rp 999.000</span></div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
+                        <span>(156)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
             
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 6">
+                    <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Smart Watch">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Smart Watch Fitness Tracker</h3>
+                    <h3 class="product-title">Smart Watch Fitness Tracker Waterproof</h3>
                     <div class="product-price">Rp 550.000</div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
@@ -615,19 +798,22 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="far fa-star"></i>
+                        <span>(98)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
             
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 7">
+                    <div class="product-badge">TERLARIS</div>
+                    <img src="https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Kamera">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Kamera Mirrorless 24MP</h3>
+                    <h3 class="product-title">Kamera Mirrorless 24MP dengan Lensa Kit</h3>
                     <div class="product-price">Rp 4.299.000</div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
@@ -635,29 +821,33 @@
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
+                        <span>(73)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
             
             <div class="product">
                 <div class="product-img">
-                    <img src="https://via.placeholder.com/250x200" alt="Produk 8">
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" alt="Peralatan Masak">
                 </div>
                 <div class="product-info">
-                    <h3 class="product-title">Set Peralatan Masak 10 Pcs</h3>
-                    <div class="product-price">Rp 650.000</div>
+                    <h3 class="product-title">Set Peralatan Masak 10 Pcs Anti Lengket</h3>
+                    <div class="product-price">Rp 650.000 <span class="old-price">Rp 850.000</span></div>
                     <div class="product-rating">
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star"></i>
                         <i class="fas fa-star-half-alt"></i>
+                        <span>(112)</span>
                     </div>
                     <div class="product-actions">
                         <button class="add-to-cart">Tambah Keranjang</button>
+                        <button class="wishlist-btn"><i class="far fa-heart"></i></button>
                     </div>
                 </div>
             </div>
@@ -707,6 +897,7 @@
                         <li><i class="fas fa-map-marker-alt"></i> Jl. Contoh No. 123, Jakarta</li>
                         <li><i class="fas fa-phone"></i> +62 123 4567 890</li>
                         <li><i class="fas fa-envelope"></i> info@mystore.com</li>
+                        <li><i class="fas fa-clock"></i> Buka Setiap Hari: 08.00 - 22.00 WIB</li>
                     </ul>
                 </div>
             </div>
@@ -718,30 +909,51 @@
     </footer>
     
     <script>
-        // Simple JavaScript untuk interaksi
+        // Slider Otomatis
         document.addEventListener('DOMContentLoaded', function() {
+            let currentSlide = 0;
+            const slides = document.querySelectorAll('.slide');
+            const totalSlides = slides.length;
+            
+            function showSlide(index) {
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[index].classList.add('active');
+            }
+            
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % totalSlides;
+                showSlide(currentSlide);
+            }
+            
+            // Ganti slide setiap 5 detik
+            setInterval(nextSlide, 5000);
+            
             // Tambah ke keranjang
             const addToCartButtons = document.querySelectorAll('.add-to-cart');
             addToCartButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    alert('Produk berhasil ditambahkan ke keranjang!');
+                    const productTitle = this.closest('.product').querySelector('.product-title').textContent;
+                    alert(`"${productTitle}" berhasil ditambahkan ke keranjang!`);
+                    
+                    // Update jumlah keranjang
+                    const cartCount = document.querySelector('.cart-count');
+                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
                 });
             });
             
-            // Animasi scroll untuk navigasi
-            const navLinks = document.querySelectorAll('nav a');
-            navLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if(targetId !== '#') {
-                        const targetElement = document.querySelector(targetId);
-                        if(targetElement) {
-                            window.scrollTo({
-                                top: targetElement.offsetTop - 100,
-                                behavior: 'smooth'
-                            });
-                        }
+            // Toggle wishlist
+            const wishlistButtons = document.querySelectorAll('.wishlist-btn');
+            wishlistButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        icon.style.color = '#e74c3c';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        icon.style.color = '';
                     }
                 });
             });
