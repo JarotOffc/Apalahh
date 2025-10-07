@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LightSecret - Solusi Pembayaran Digital Premium</title>
+    <title>LightSecret - Solusi Hosting & Jasa Premium</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
@@ -161,14 +161,14 @@
             line-height: 1.6;
         }
 
-        .payment-methods {
+        .products {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
 
-        .method-card {
+        .product-card {
             background: linear-gradient(145deg, rgba(26, 23, 53, 0.8), rgba(33, 29, 70, 0.9));
             border-radius: 20px;
             padding: 30px;
@@ -186,17 +186,17 @@
             animation-fill-mode: both;
         }
 
-        .method-card:nth-child(1) { animation-delay: 0.2s; }
-        .method-card:nth-child(2) { animation-delay: 0.3s; }
-        .method-card:nth-child(3) { animation-delay: 0.4s; }
-        .method-card:nth-child(4) { animation-delay: 0.5s; }
+        .product-card:nth-child(1) { animation-delay: 0.2s; }
+        .product-card:nth-child(2) { animation-delay: 0.3s; }
+        .product-card:nth-child(3) { animation-delay: 0.4s; }
+        .product-card:nth-child(4) { animation-delay: 0.5s; }
 
         @keyframes fadeInUp {
             from { transform: translateY(30px); opacity: 0; }
             to { transform: translateY(0); opacity: 1; }
         }
 
-        .method-card::before {
+        .product-card::before {
             content: '';
             position: absolute;
             top: -2px;
@@ -210,35 +210,38 @@
             transition: var(--transition);
         }
 
-        .method-card:hover {
+        .product-card:hover {
             transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale3d(1.03, 1.03, 1.03);
             box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), var(--glow-primary);
         }
 
-        .method-card:hover::before {
+        .product-card:hover::before {
             opacity: 1;
         }
 
-        .method-logo {
+        .product-icon {
             width: 80px;
             height: 80px;
             margin: 0 auto 20px;
-            object-fit: contain;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: var(--transition);
             filter: drop-shadow(0 0 5px rgba(199, 125, 255, 0.5));
+            font-size: 2.5rem;
         }
 
-        .gopay .method-logo { background-color: #00d1e5; }
-        .ovo .method-logo { background-color: #4c3f91; }
-        .gopay .method-logo { background-color: #00aed6; }
-        .qris .method-logo { background-color: #f9a825; }
+        .vps .product-icon { background: linear-gradient(45deg, #00d1e5, #00aed6); }
+        .panel .product-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
+        .jasarun .product-icon { background: linear-gradient(45deg, #f9a825, #ffb74d); }
 
-        .method-card:hover .method-logo {
+        .product-card:hover .product-icon {
             transform: scale(1.1) translateY(-5px);
             filter: drop-shadow(0 0 10px currentColor);
         }
 
-        .method-title {
+        .product-title {
             font-size: 1.8rem;
             font-weight: 700;
             margin-bottom: 15px;
@@ -246,11 +249,32 @@
             color: var(--neon);
         }
 
-        .method-desc {
+        .product-desc {
             font-size: 1rem;
             opacity: 0.8;
             margin-bottom: 20px;
             min-height: 60px;
+            line-height: 1.5;
+        }
+
+        .product-features {
+            text-align: left;
+            margin: 20px 0;
+            padding: 0 15px;
+        }
+
+        .product-features li {
+            margin-bottom: 8px;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .product-features li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
         }
 
         .btn {
@@ -290,48 +314,6 @@
         .btn-outline:hover {
             background: linear-gradient(45deg, var(--primary), var(--accent));
             color: white;
-        }
-
-.qris-code {
-    width: 100%;
-    max-width: 240px;
-    aspect-ratio: 1 / 1;
-    margin: 0 auto 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient(45deg, #2c254a, #1a1a2e);
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid rgba(157, 78, 221, 0.3);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            margin: 0 auto 20px;
-            background: linear-gradient(45deg, #2c254a, #1a1a2e);
-            border-radius: 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
-            border: 1px solid rgba(157, 78, 221, 0.3);
-        }
-
-        .qris-code::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transform: rotate(45deg);
-            animation: shine 3s infinite;
-        }
-
-        @keyframes shine {
-            0% { transform: rotate(45deg) translateX(-100%); }
-            100% { transform: rotate(45deg) translateX(100%); }
         }
 
         .modal {
@@ -376,18 +358,20 @@
             opacity: 1;
         }
 
-        .modal-logo {
+        .modal-icon {
             width: 100px;
             height: 100px;
             margin: 0 auto 20px;
-            object-fit: contain;
             border-radius: 20px;
-            padding: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
         }
 
-        .gopay-modal .modal-logo { background-color: #00d1e5; }
-        .ovo-modal .modal-logo { background-color: #4c3f91; }
-        .gopay-modal .modal-logo { background-color: #00aed6; }
+        .vps-modal .modal-icon { background: linear-gradient(45deg, #00d1e5, #00aed6); }
+        .panel-modal .modal-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
+        .jasarun-modal .modal-icon { background: linear-gradient(45deg, #f9a825, #ffb74d); }
 
         .modal-title {
             font-size: 2.2rem;
@@ -396,44 +380,45 @@
             color: var(--neon);
         }
 
-        .account-number {
-            font-size: 2.2rem;
-            font-weight: 700;
-            background: linear-gradient(to right, var(--neon), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            margin: 25px 0;
-            padding: 15px;
-            border-radius: 15px;
-            border: 1px solid rgba(157, 78, 221, 0.4);
-            box-shadow: inset 0 0 20px rgba(157, 78, 221, 0.3);
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .account-number::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            animation: slide 2s infinite;
-        }
-
-        @keyframes slide {
-            100% { left: 100%; }
-        }
-
-        .copy-btn {
-            background: linear-gradient(45deg, var(--accent), var(--secondary));
-            margin-top: 15px;
-            width: 100%;
-            padding: 15px;
+        .modal-description {
             font-size: 1.1rem;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .order-info {
+            background: rgba(157, 78, 221, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 1px solid rgba(157, 78, 221, 0.3);
+        }
+
+        .order-steps {
+            text-align: left;
+            margin: 20px 0;
+        }
+
+        .order-steps li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+        }
+
+        .order-steps li:before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            left: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            font-weight: bold;
         }
 
         .close-btn {
@@ -499,21 +484,18 @@
                 font-size: 2.3rem;
             }
             
-            .method-card {
+            .product-card {
                 padding: 25px;
             }
             
-            .method-logo {
+            .product-icon {
                 width: 70px;
                 height: 70px;
+                font-size: 2rem;
             }
             
-            .method-title {
+            .product-title {
                 font-size: 1.6rem;
-            }
-            
-            .account-number {
-                font-size: 1.8rem;
             }
         }
 
@@ -536,32 +518,23 @@
                 font-size: 1rem;
             }
             
-            .payment-methods {
+            .products {
                 grid-template-columns: 1fr;
                 gap: 25px;
-            }
-            
-            .qris-code {
-                width: 180px;
-                height: 180px;
             }
             
             .modal-content {
                 padding: 30px 20px;
             }
             
-            .modal-logo {
+            .modal-icon {
                 width: 80px;
                 height: 80px;
+                font-size: 2.5rem;
             }
             
             .modal-title {
                 font-size: 1.8rem;
-            }
-            
-            .account-number {
-                font-size: 1.6rem;
-                padding: 12px;
             }
         }
 
@@ -576,23 +549,19 @@
                 font-size: 1.8rem;
             }
             
-            .method-logo {
+            .product-icon {
                 width: 60px;
                 height: 60px;
+                font-size: 1.8rem;
             }
             
-            .method-title {
+            .product-title {
                 font-size: 1.5rem;
             }
             
             .btn {
                 padding: 10px 25px;
                 font-size: 0.9rem;
-            }
-            
-            .account-number {
-                font-size: 1.4rem;
-                letter-spacing: 1px;
             }
         }
     </style>
@@ -606,111 +575,146 @@
             <div class="profile-container">
                 <!-- Ganti URL gambar di bawah ini dengan foto profil Anda -->
                 <div class="profile-avatar">
-    <img src="https://files.catbox.moe/h3nu9c.jpg" alt="Profile Picture" style="width: 160%; height: 160%; object-fit: cover; border-radius: 200%;">
+                    <img src="https://files.catbox.moe/h3nu9c.jpg" alt="Profile Picture" style="width: 160%; height: 160%; object-fit: cover; border-radius: 200%;">
                 </div>
                 <div class="glowing-border"></div>
             </div>
             <h1>LIGHTSECRET</h1>
-            <p class="subtitle">Solusi pembayaran digital premium dengan keamanan terbaik dan proses instan untuk transaksi di lightsecret hosting</p>
+            <p class="subtitle">Solusi hosting & jasa premium dengan performa terbaik dan layanan 24/7 untuk kebutuhan digital Anda</p>
         </header>
         
-        <div class="payment-methods">
-            <!-- gopay -->
-            <div class="method-card gopay" onclick="showModal('gopay')">
-                <!-- Ganti URL gambar di bawah ini dengan logo gopay -->
-                <div class="method-logo" style="background-color: #00d1e5; display: flex; align-items: center; justify-content: center; border-radius: 12px;">
-                    <i class="fas fa-wallet" style="font-size: 2.5rem; color: white;"></i>
+        <div class="products">
+            <!-- VPS -->
+            <div class="product-card vps" onclick="showModal('vps')">
+                <div class="product-icon">
+                    <i class="fas fa-server"></i>
                 </div>
-                <h3 class="method-title">gopay</h3>
-                <p class="method-desc">Transfer instan melalui aplikasi gopay dengan biaya 0%</p>
-                <button class="btn">Lihat Nomor Pembayaran</button>
+                <h3 class="product-title">VPS Premium</h3>
+                <p class="product-desc">Virtual Private Server dengan performa tinggi dan spesifikasi terbaik</p>
+                <ul class="product-features">
+                    <li>SSD High-Speed Storage</li>
+                    <li>Intel Xeon Processors</li>
+                    <li>24/7 Technical Support</li>
+                    <li>99.9% Uptime Guarantee</li>
+                </ul>
+                <button class="btn">Order Sekarang</button>
             </div>
             
-            <!-- OVO -->
-            <div class="method-card ovo" onclick="showModal('ovo')">
-                <!-- Ganti URL gambar di bawah ini dengan logo OVO -->
-                <div class="method-logo" style="background-color: #4c3f91; display: flex; align-items: center; justify-content: center; border-radius: 12px;">
-                    <i class="fas fa-mobile-alt" style="font-size: 2.5rem; color: white;"></i>
+            <!-- Panel -->
+            <div class="product-card panel" onclick="showModal('panel')">
+                <div class="product-icon">
+                    <i class="fas fa-cogs"></i>
                 </div>
-                <h3 class="method-title">OVO</h3>
-                <p class="method-desc">Pembayaran mudah dengan OVO, proses cepat dan aman</p>
-                <button class="btn">Lihat Nomor Pembayaran</button>
+                <h3 class="product-title">Control Panel</h3>
+                <p class="product-desc">Panel kontrol lengkap untuk mengelola hosting dan website Anda</p>
+                <ul class="product-features">
+                    <li>User-Friendly Interface</li>
+                    <li>One-Click Installations</li>
+                    <li>Advanced Security Features</li>
+                    <li>Real-time Monitoring</li>
+                </ul>
+                <button class="btn">Order Sekarang</button>
             </div>
             
-<!-- Dana -->
-<div class="method-card gopay" onclick="showModal('gopay')">
-    <!-- Ganti URL gambar di bawah ini dengan logo Dana -->
-    <div class="method-logo" style="background-color: #00aed6; display: flex; align-items: center; justify-content: center; border-radius: 12px;">
-        <img src="https://files.catbox.moe/ub1asb.jpg" alt="Logo Dana" style="width: 50px; height: 50px; object-fit: contain;">
-    </div>
-    <h3 class="method-title">Dana</h3>
-    <p class="method-desc">Gunakan Dana untuk transaksi praktis tanpa ribet</p>
-    <button class="btn">Lihat Nomor Pembayaran</button>
-</div>
-            
-<!-- QRIS -->
-<div class="method-card qris">
-    <div class="qris-code">
-        <img src="https://files.catbox.moe/7k2f7u.jpg" alt="QRIS Code" style="width: 100%; height: 100%; object-fit: contain;">
-    </div>
-    <h3 class="method-title">QRIS</h3>
-    <p class="method-desc">Scan QRIS untuk pembayaran instan</p>
-    <button class="btn btn-outline">LIGHTSECRET QRIS</button>
-</div>
+            <!-- Jasa Run -->
+            <div class="product-card jasarun" onclick="showModal('jasarun')">
+                <div class="product-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="product-title">Jasa Run Bot</h3>
+                <p class="product-desc">Layanan running bot dan automation dengan stabilitas maksimal</p>
+                <ul class="product-features">
+                    <li>24/7 Bot Running</li>
+                    <li>Auto Restart System</li>
+                    <li>Performance Optimization</li>
+                    <li>Priority Support</li>
+                </ul>
+                <button class="btn">Order Sekarang</button>
+            </div>
         </div>
         
         <footer>
-            <p>&copy; 2025 LightSecret. Layanan Pembayaran Digital Premium.</p>
+            <p>&copy; 2025 LightSecret. Layanan Hosting & Jasa Premium.</p>
         </footer>
     </div>
     
     <!-- Modals -->
-    <div class="modal gopay-modal" id="gopay-modal">
+    <div class="modal vps-modal" id="vps-modal">
         <div class="modal-content">
             <div class="close-btn" onclick="closeModal()">
                 <i class="fas fa-times"></i>
             </div>
-            <div class="modal-logo" style="background-color: #00d1e5; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-wallet" style="font-size: 3rem; color: white;"></i>
+            <div class="modal-icon">
+                <i class="fas fa-server"></i>
             </div>
-            <h2 class="modal-title">gopay</h2>
-            <p>Nomor akun gopay untuk pembayaran:</p>
-            <div class="account-number">085900017703</div>
-            <button class="btn copy-btn" onclick="copyToClipboard('085900017703')">Salin Nomor</button>
+            <h2 class="modal-title">VPS Premium</h2>
+            <p class="modal-description">Pilih paket VPS Premium sesuai kebutuhan Anda dengan performa terbaik dan dukungan teknis 24/7.</p>
+            
+            <div class="order-info">
+                <h3>Cara Order VPS:</h3>
+                <ol class="order-steps">
+                    <li>Pilih spesifikasi VPS yang diinginkan</li>
+                    <li>Hubungi admin via WhatsApp</li>
+                    <li>Konfirmasi pembayaran</li>
+                    <li>VPS akan diaktifkan dalam 1-2 jam</li>
+                </ol>
+            </div>
+            
+            <button class="btn" onclick="orderProduct('VPS Premium')">Hubungi Admin</button>
         </div>
     </div>
     
-    <div class="modal ovo-modal" id="ovo-modal">
+    <div class="modal panel-modal" id="panel-modal">
         <div class="modal-content">
             <div class="close-btn" onclick="closeModal()">
                 <i class="fas fa-times"></i>
             </div>
-            <div class="modal-logo" style="background-color: #4c3f91; display: flex; align-items: center; justify-content: center;">
-                <i class="fas fa-mobile-alt" style="font-size: 3rem; color: white;"></i>
+            <div class="modal-icon">
+                <i class="fas fa-cogs"></i>
             </div>
-            <h2 class="modal-title">OVO</h2>
-            <p>Nomor akun OVO untuk pembayaran:</p>
-            <div class="account-number">085900017703</div>
-            <button class="btn copy-btn" onclick="copyToClipboard('085900017703')">Salin Nomor</button>
+            <h2 class="modal-title">Control Panel</h2>
+            <p class="modal-description">Dapatkan control panel lengkap dengan fitur terbaru untuk mengelola hosting dan website Anda dengan mudah.</p>
+            
+            <div class="order-info">
+                <h3>Cara Order Panel:</h3>
+                <ol class="order-steps">
+                    <li>Tentukan kebutuhan panel Anda</li>
+                    <li>Hubungi admin untuk konsultasi</li>
+                    <li>Lakukan pembayaran</li>
+                    <li>Panel akan diinstall dan dikonfigurasi</li>
+                </ol>
+            </div>
+            
+            <button class="btn" onclick="orderProduct('Control Panel')">Hubungi Admin</button>
         </div>
     </div>
     
-    <div class="modal gopay-modal" id="gopay-modal">
+    <div class="modal jasarun-modal" id="jasarun-modal">
         <div class="modal-content">
             <div class="close-btn" onclick="closeModal()">
                 <i class="fas fa-times"></i>
             </div>
-            <div class="modal-logo" style="background-color: #00aed6; display: flex; align-items: center; justify-content: center;">
-                <i class="fab fa-google-wallet" style="font-size: 3rem; color: white;"></i>
+            <div class="modal-icon">
+                <i class="fas fa-rocket"></i>
             </div>
-            <h2 class="modal-title">Dana</h2>
-            <p>Nomor akun Dana untuk pembayaran:</p>
-            <div class="account-number">085900017703</div>
-            <button class="btn copy-btn" onclick="copyToClipboard('085900017703')">Salin Nomor</button>
+            <h2 class="modal-title">Jasa Run Bot</h2>
+            <p class="modal-description">Jasa running bot profesional dengan garansi uptime dan support teknis untuk kebutuhan automation Anda.</p>
+            
+            <div class="order-info">
+                <h3>Cara Order Jasa Run:</h3>
+                <ol class="order-steps">
+                    <li>Jelaskan kebutuhan bot Anda</li>
+                    <li>Diskusikan spesifikasi dengan admin</li>
+                    <li>Konfirmasi harga dan pembayaran</li>
+                    <li>Bot akan dijalankan dan dimonitor</li>
+                </ol>
+            </div>
+            
+            <button class="btn" onclick="orderProduct('Jasa Run Bot')">Hubungi Admin</button>
         </div>
     </div>
     
-    <div class="notification" id="notification">Nomor berhasil disalin!</div>
+    <div class="notification" id="notification">Mengarahkan ke WhatsApp...</div>
 
     <script>
         // Create stars background
@@ -720,7 +724,7 @@
             
             for (let i = 0; i < starsCount; i++) {
                 const star = document.createElement('div');
-                star.classList.add('star'); // Fixed missing closing quote here
+                star.classList.add('star');
                 
                 // Random position
                 const posX = Math.random() * 100;
@@ -747,8 +751,8 @@
         }
         
         // Modal functions
-        function showModal(method) {
-            const modal = document.getElementById(`${method}-modal`);
+        function showModal(product) {
+            const modal = document.getElementById(`${product}-modal`);
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -759,11 +763,19 @@
             document.body.style.overflow = 'auto';
         }
         
-        // Copy to clipboard
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showNotification();
-            });
+        // Order product function
+        function orderProduct(productName) {
+            const phoneNumber = "6285900017703";
+            const message = `Halo Admin LightSecret, saya ingin order ${productName}. Bisa info lebih lanjut?`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            // Show notification
+            showNotification();
+            
+            // Redirect to WhatsApp after short delay
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1000);
         }
         
         function showNotification() {
@@ -772,7 +784,7 @@
             
             setTimeout(() => {
                 notification.classList.remove('show');
-            }, 3000);
+            }, 2000);
         }
         
         // Close modal when clicking outside
@@ -790,7 +802,7 @@
             createStars();
             
             // Add 3D tilt effect to cards
-            const cards = document.querySelectorAll('.method-card');
+            const cards = document.querySelectorAll('.product-card');
             cards.forEach(card => {
                 card.addEventListener('mousemove', (e) => {
                     const cardRect = card.getBoundingClientRect();
