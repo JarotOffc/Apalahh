@@ -3,900 +3,746 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Oscar Store - Solusi Hosting & Jasa Premium</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>MyStore - Toko Online Terpercaya</title>
     <style>
+        /* Reset dan Styling Dasar */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Outfit', 'Poppins', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         }
-
-        :root {
-            --dark-bg: #0d0b1d;
-            --card-bg: #1a1735;
-            --primary: #9d4edd;
-            --secondary: #5a189a;
-            --accent: #c77dff;
-            --neon: #e0aaff;
-            --text: #f5f3ff;
-            --glow-primary: 0 0 15px rgba(157, 78, 221, 0.7);
-            --glow-secondary: 0 0 15px rgba(199, 125, 255, 0.7);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
+        
         body {
-            background: linear-gradient(135deg, var(--dark-bg) 0%, #130f2e 100%);
-            color: var(--text);
-            min-height: 100vh;
-            overflow-x: hidden;
-            padding: 20px;
-            position: relative;
-            animation: fadeIn 1.2s ease-out;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
         }
-
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(157, 78, 221, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 70%, rgba(199, 125, 255, 0.15) 0%, transparent 40%);
-            z-index: -1;
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-        }
-
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: twinkle var(--duration, 5s) infinite var(--delay, 0s);
-        }
-
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.2; }
-            50% { opacity: 1; }
-        }
-
+        
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
-        }
-
-        header {
-            text-align: center;
-            margin: 30px 0 50px;
-            position: relative;
-            animation: slideDown 0.8s ease-out;
-        }
-
-        @keyframes slideDown {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .profile-container {
-            display: inline-block;
-            position: relative;
-            margin-bottom: 25px;
-        }
-
-        .profile-avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            border: 3px solid var(--neon);
-            box-shadow: var(--glow-primary);
-            object-fit: cover;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 60px;
-            transition: var(--transition);
-        }
-
-        .profile-avatar:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 25px var(--primary);
-        }
-
-        .glowing-border {
-            position: absolute;
-            top: -8px;
-            left: -8px;
-            right: -8px;
-            bottom: -8px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            z-index: -1;
-            filter: blur(15px);
-            opacity: 0.7;
-            animation: rotate 8s linear infinite;
-        }
-
-        @keyframes rotate {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        h1 {
-            font-family: 'Outfit', sans-serif;
-            font-size: 2.8rem;
-            font-weight: 800;
-            margin-bottom: 10px;
-            background: linear-gradient(to right, var(--neon), var(--accent));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 15px rgba(199, 125, 255, 0.4);
-            letter-spacing: 1px;
-        }
-
-        .subtitle {
-            font-size: 1.2rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto 30px;
-            line-height: 1.6;
-        }
-
-        .products {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .product-card {
-            background: linear-gradient(145deg, rgba(26, 23, 53, 0.8), rgba(33, 29, 70, 0.9));
-            border-radius: 20px;
-            padding: 30px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(157, 78, 221, 0.3);
-            backdrop-filter: blur(10px);
-            transform: perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1);
-            transform-style: preserve-3d;
-            cursor: pointer;
-            animation: fadeInUp 1s ease-out;
-            animation-fill-mode: both;
-        }
-
-        .product-card:nth-child(1) { animation-delay: 0.2s; }
-        .product-card:nth-child(2) { animation-delay: 0.3s; }
-        .product-card:nth-child(3) { animation-delay: 0.4s; }
-        .product-card:nth-child(4) { animation-delay: 0.5s; }
-
-        @keyframes fadeInUp {
-            from { transform: translateY(30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
-        .product-card::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            bottom: -2px;
-            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent));
-            z-index: -1;
-            border-radius: 22px;
-            opacity: 0;
-            transition: var(--transition);
-        }
-
-        .product-card:hover {
-            transform: perspective(1000px) rotateX(5deg) rotateY(5deg) scale3d(1.03, 1.03, 1.03);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), var(--glow-primary);
-        }
-
-        .product-card:hover::before {
-            opacity: 1;
-        }
-
-        .product-icon {
-            width: 80px;
-            height: 80px;
-            margin: 0 auto 20px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: var(--transition);
-            filter: drop-shadow(0 0 5px rgba(199, 125, 255, 0.5));
-            font-size: 2.5rem;
-        }
-
-        .vps .product-icon { background: linear-gradient(45deg, #00d1e5, #00aed6); }
-        .pterodactyl .product-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
-        .jasarun .product-icon { background: linear-gradient(45deg, #f9a825, #ffb74d); }
-
-        .product-card:hover .product-icon {
-            transform: scale(1.1) translateY(-5px);
-            filter: drop-shadow(0 0 10px currentColor);
-        }
-
-        .product-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            font-family: 'Outfit', sans-serif;
-            color: var(--neon);
-        }
-
-        .product-desc {
-            font-size: 1rem;
-            opacity: 0.8;
-            margin-bottom: 20px;
-            min-height: 60px;
-            line-height: 1.5;
-        }
-
-        .product-features {
-            text-align: left;
-            margin: 20px 0;
             padding: 0 15px;
         }
-
-        .product-features li {
-            margin-bottom: 8px;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .product-features li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-        }
-
-        .btn {
-            display: inline-block;
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            color: white;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 5px 20px rgba(157, 78, 221, 0.5);
-            transform: translateY(0);
-            letter-spacing: 0.5px;
-        }
-
-        .btn:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(157, 78, 221, 0.7), var(--glow-primary);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--primary);
-            color: var(--neon);
-            box-shadow: 0 0 15px rgba(157, 78, 221, 0.3);
-        }
-
-        .btn-outline:hover {
-            background: linear-gradient(45deg, var(--primary), var(--accent));
-            color: white;
-        }
-
-        .modal {
-            position: fixed;
+        
+        /* Header */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(13, 11, 29, 0.95);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: var(--transition);
-            backdrop-filter: blur(10px);
+            z-index: 100;
         }
-
-        .modal.active {
-            opacity: 1;
-            visibility: visible;
+        
+        .header-top {
+            background-color: #f8f8f8;
+            padding: 8px 0;
+            font-size: 14px;
         }
-
-        .modal-content {
-            background: linear-gradient(145deg, rgba(26, 23, 53, 0.95), rgba(33, 29, 70, 0.98));
-            border-radius: 25px;
-            width: 90%;
-            max-width: 600px;
-            padding: 40px;
-            text-align: center;
-            position: relative;
-            transform: translateY(30px);
-            opacity: 0;
-            transition: var(--transition);
-            border: 1px solid rgba(157, 78, 221, 0.4);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), var(--glow-primary);
-        }
-
-        .modal.active .modal-content {
-            transform: translateY(0);
-            opacity: 1;
-        }
-
-        .modal-icon {
-            width: 100px;
-            height: 100px;
-            margin: 0 auto 20px;
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-        }
-
-        .vps-modal .modal-icon { background: linear-gradient(45deg, #00d1e5, #00aed6); }
-        .pterodactyl-modal .modal-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
-        .jasarun-modal .modal-icon { background: linear-gradient(45deg, #f9a825, #ffb74d); }
-
-        .modal-title {
-            font-size: 2.2rem;
-            margin-bottom: 20px;
-            font-family: 'Outfit', sans-serif;
-            color: var(--neon);
-        }
-
-        .modal-description {
-            font-size: 1.1rem;
-            margin-bottom: 25px;
-            line-height: 1.6;
-        }
-
-        .ram-list {
-            background: rgba(157, 78, 221, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border: 1px solid rgba(157, 78, 221, 0.3);
-            text-align: left;
-        }
-
-        .ram-list h3 {
-            color: var(--neon);
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 1.3rem;
-        }
-
-        .ram-option {
+        
+        .header-top .container {
             display: flex;
             justify-content: space-between;
+        }
+        
+        .header-main {
+            padding: 15px 0;
+        }
+        
+        .header-main .container {
+            display: flex;
             align-items: center;
-            padding: 10px 15px;
-            margin-bottom: 8px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            transition: var(--transition);
+            justify-content: space-between;
         }
-
-        .ram-option:hover {
-            background: rgba(157, 78, 221, 0.2);
+        
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #e74c3c;
         }
-
-        .ram-option:last-child {
-            margin-bottom: 0;
-        }
-
-        .ram-size {
-            font-weight: 600;
-            color: var(--neon);
-        }
-
-        .ram-price {
-            color: var(--text);
-            opacity: 0.9;
-        }
-
-        .order-info {
-            background: rgba(157, 78, 221, 0.1);
-            padding: 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-            border: 1px solid rgba(157, 78, 221, 0.3);
-        }
-
-        .order-steps {
-            text-align: left;
-            margin: 20px 0;
-        }
-
-        .order-steps li {
-            margin-bottom: 15px;
-            padding-left: 30px;
+        
+        .search-bar {
+            flex: 1;
+            max-width: 600px;
+            margin: 0 20px;
             position: relative;
         }
-
-        .order-steps li:before {
-            content: counter(step);
-            counter-increment: step;
+        
+        .search-bar input {
+            width: 100%;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+        }
+        
+        .search-bar button {
+            position: absolute;
+            right: 5px;
+            top: 5px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .header-actions a {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 12px;
+        }
+        
+        .header-actions i {
+            font-size: 20px;
+            margin-bottom: 3px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #e74c3c;
+            padding: 10px 0;
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            justify-content: space-between;
+        }
+        
+        nav a {
+            color: white;
+            font-weight: 500;
+            padding: 5px 10px;
+            transition: all 0.3s;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.1);
+            border-radius: 4px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://via.placeholder.com/1200x400');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .hero h1 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 25px;
+        }
+        
+        .btn {
+            display: inline-block;
+            background: #e74c3c;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .btn:hover {
+            background: #c0392b;
+            transform: translateY(-3px);
+        }
+        
+        /* Kategori */
+        .section-title {
+            text-align: center;
+            margin: 40px 0 20px;
+            position: relative;
+        }
+        
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #e74c3c;
+            margin: 10px auto;
+        }
+        
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        
+        .category {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .category:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .category i {
+            font-size: 30px;
+            color: #e74c3c;
+            margin-bottom: 10px;
+        }
+        
+        /* Produk */
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .product {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+        
+        .product:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .product-img {
+            height: 200px;
+            background-color: #f8f8f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        
+        .product-img img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        
+        .product-info {
+            padding: 15px;
+        }
+        
+        .product-title {
+            font-weight: 600;
+            margin-bottom: 10px;
+            height: 40px;
+            overflow: hidden;
+        }
+        
+        .product-price {
+            color: #e74c3c;
+            font-weight: bold;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .product-rating {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+        
+        .product-actions {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .add-to-cart {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-to-cart:hover {
+            background: #c0392b;
+        }
+        
+        /* Footer */
+        footer {
+            background: #333;
+            color: #fff;
+            padding: 40px 0 20px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+        
+        .footer-column h3:after {
+            content: '';
             position: absolute;
             left: 0;
-            width: 24px;
-            height: 24px;
-            background: var(--primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            font-weight: bold;
-        }
-
-        .close-btn {
-            position: absolute;
-            top: 20px;
-            right: 20px;
+            bottom: 0;
             width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
+            height: 2px;
+            background: #e74c3c;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: #e74c3c;
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .social-icons a {
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid rgba(157, 78, 221, 0.4);
+            width: 36px;
+            height: 36px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transition: all 0.3s;
         }
-
-        .close-btn:hover {
-            background: rgba(255, 0, 0, 0.3);
-            transform: rotate(90deg);
+        
+        .social-icons a:hover {
+            background: #e74c3c;
+            transform: translateY(-3px);
         }
-
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%) translateY(100px);
-            background: linear-gradient(45deg, var(--accent), var(--secondary));
-            color: white;
-            padding: 15px 30px;
-            border-radius: 50px;
-            font-weight: 600;
-            z-index: 2000;
-            opacity: 0;
-            transition: var(--transition);
-            box-shadow: 0 5px 25px rgba(157, 78, 221, 0.6);
-        }
-
-        .notification.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        footer {
+        
+        .footer-bottom {
             text-align: center;
-            margin-top: 60px;
-            padding: 20px;
-            font-size: 0.9rem;
-            opacity: 0.7;
-            animation: fadeIn 1.5s ease-out;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
         }
-
-        /* Responsive Design */
-        @media (max-width: 992px) {
-            .profile-avatar {
-                width: 130px;
-                height: 130px;
-                font-size: 50px;
-            }
-            
-            h1 {
-                font-size: 2.3rem;
-            }
-            
-            .product-card {
-                padding: 25px;
-            }
-            
-            .product-icon {
-                width: 70px;
-                height: 70px;
-                font-size: 2rem;
-            }
-            
-            .product-title {
-                font-size: 1.6rem;
-            }
-        }
-
+        
+        /* Responsive */
         @media (max-width: 768px) {
-            header {
-                margin: 20px 0 40px;
+            .header-main .container {
+                flex-direction: column;
+                gap: 15px;
             }
             
-            .profile-avatar {
-                width: 110px;
-                height: 110px;
-                font-size: 45px;
+            .search-bar {
+                margin: 10px 0;
+                max-width: 100%;
             }
             
-            h1 {
-                font-size: 2rem;
+            nav ul {
+                flex-wrap: wrap;
+                gap: 10px;
             }
             
-            .subtitle {
-                font-size: 1rem;
+            .hero {
+                padding: 50px 0;
             }
             
-            .products {
-                grid-template-columns: 1fr;
-                gap: 25px;
+            .hero h1 {
+                font-size: 28px;
             }
             
-            .modal-content {
-                padding: 30px 20px;
-                max-width: 95%;
-            }
-            
-            .modal-icon {
-                width: 80px;
-                height: 80px;
-                font-size: 2.5rem;
-            }
-            
-            .modal-title {
-                font-size: 1.8rem;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .profile-avatar {
-                width: 100px;
-                height: 100px;
-                font-size: 40px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .product-icon {
-                width: 60px;
-                height: 60px;
-                font-size: 1.8rem;
-            }
-            
-            .product-title {
-                font-size: 1.5rem;
-            }
-            
-            .btn {
-                padding: 10px 25px;
-                font-size: 0.9rem;
+            .hero p {
+                font-size: 16px;
             }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- Background stars -->
-    <div class="stars" id="stars"></div>
-    
-    <div class="container">
-        <header>
-            <div class="profile-container">
-                <div class="profile-avatar">
-                    <img src="https://files.catbox.moe/h3nu9c.jpg" alt="Profile Picture" style="width: 160%; height: 160%; object-fit: cover; border-radius: 200%;">
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="contact-info">
+                    <span><i class="fas fa-phone"></i> +62 123 4567 890</span>
                 </div>
-                <div class="glowing-border"></div>
+                <div class="promo-text">
+                    <span>Gratis Ongkir untuk Pembelian di Atas Rp 100.000</span>
+                </div>
             </div>
-            <h1>LIGHTSECRET</h1>
-            <p class="subtitle">Solusi hosting & jasa premium dengan performa terbaik dan layanan 24/7 untuk kebutuhan digital Anda</p>
-        </header>
+        </div>
         
+        <div class="header-main">
+            <div class="container">
+                <div class="logo">
+                    <a href="#">MyStore</a>
+                </div>
+                
+                <div class="search-bar">
+                    <input type="text" placeholder="Cari produk...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                
+                <div class="header-actions">
+                    <a href="#">
+                        <i class="fas fa-user"></i>
+                        <span>Akun</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-heart"></i>
+                        <span>Favorit</span>
+                    </a>
+                    <a href="#">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Keranjang</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="#">Beranda</a></li>
+                <li><a href="#">Produk</a></li>
+                <li><a href="#">Kategori</a></li>
+                <li><a href="#">Promo</a></li>
+                <li><a href="#">Terbaru</a></li>
+                <li><a href="#">Tentang Kami</a></li>
+                <li><a href="#">Kontak</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Selamat Datang di MyStore</h1>
+            <p>Temukan produk terbaik dengan harga terjangkau hanya di toko online kami. Berbagai pilihan produk dengan kualitas terjamin.</p>
+            <a href="#" class="btn">Belanja Sekarang</a>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Kategori -->
+        <h2 class="section-title">Kategori Produk</h2>
+        <div class="categories">
+            <div class="category">
+                <i class="fas fa-mobile-alt"></i>
+                <h3>Elektronik</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-tshirt"></i>
+                <h3>Fashion</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-home"></i>
+                <h3>Rumah Tangga</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-gamepad"></i>
+                <h3>Game & Hobi</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-utensils"></i>
+                <h3>Makanan</h3>
+            </div>
+            <div class="category">
+                <i class="fas fa-heartbeat"></i>
+                <h3>Kesehatan</h3>
+            </div>
+        </div>
+        
+        <!-- Produk Terbaru -->
+        <h2 class="section-title">Produk Terbaru</h2>
         <div class="products">
-            <!-- VPS -->
-            <div class="product-card vps" onclick="showModal('vps')">
-                <div class="product-icon">
-                    <i class="fas fa-server"></i>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 1">
                 </div>
-                <h3 class="product-title">VPS Premium</h3>
-                <p class="product-desc">Virtual Private Server dengan performa tinggi dan spesifikasi terbaik</p>
-                <ul class="product-features">
-                    <li>SSD High-Speed Storage</li>
-                    <li>Intel Xeon Processors</li>
-                    <li>24/7 Technical Support</li>
-                    <li>99.9% Uptime Guarantee</li>
-                </ul>
-                <button class="btn">Order Sekarang</button>
+                <div class="product-info">
+                    <h3 class="product-title">Smartphone XYZ 128GB RAM 6GB</h3>
+                    <div class="product-price">Rp 2.499.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
             </div>
             
-            <!-- Panel Pterodactyl -->
-            <div class="product-card pterodactyl" onclick="showModal('pterodactyl')">
-                <div class="product-icon">
-                    <i class="fas fa-dragon"></i>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 2">
                 </div>
-                <h3 class="product-title">Panel Pterodactyl</h3>
-                <p class="product-desc">Game server control panel dengan fitur lengkap dan mudah digunakan</p>
-                <ul class="product-features">
-                    <li>Open Source & Free</li>
-                    <li>User-Friendly Interface</li>
-                    <li>Multi-Game Support</li>
-                    <li>Advanced Security</li>
-                </ul>
-                <button class="btn">Order Sekarang</button>
+                <div class="product-info">
+                    <h3 class="product-title">Sepatu Sneakers Casual Pria</h3>
+                    <div class="product-price">Rp 299.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
             </div>
             
-            <!-- Jasa Run -->
-            <div class="product-card jasarun" onclick="showModal('jasarun')">
-                <div class="product-icon">
-                    <i class="fas fa-rocket"></i>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 3">
                 </div>
-                <h3 class="product-title">Jasa Run Bot</h3>
-                <p class="product-desc">Layanan running bot dan automation dengan stabilitas maksimal</p>
-                <ul class="product-features">
-                    <li>24/7 Bot Running</li>
-                    <li>Auto Restart System</li>
-                    <li>Performance Optimization</li>
-                    <li>Priority Support</li>
-                </ul>
-                <button class="btn">Order Sekarang</button>
+                <div class="product-info">
+                    <h3 class="product-title">Blender Multifungsi 5in1</h3>
+                    <div class="product-price">Rp 450.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 4">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Tas Ransel Wanita Trendy</h3>
+                    <div class="product-price">Rp 189.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
             </div>
         </div>
         
-        <footer>
-            <p>&copy; 2025 Oscar Store. Layanan Hosting & Jasa Premium.</p>
-        </footer>
-    </div>
-    
-    <!-- Modals -->
-    <div class="modal vps-modal" id="vps-modal">
-        <div class="modal-content">
-            <div class="close-btn" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="modal-icon">
-                <i class="fas fa-server"></i>
-            </div>
-            <h2 class="modal-title">VPS Premium</h2>
-            <p class="modal-description">Pilih paket VPS Premium sesuai kebutuhan Anda dengan performa terbaik dan dukungan teknis 24/7.</p>
-            
-            <div class="order-info">
-                <h3>Cara Order VPS:</h3>
-                <ol class="order-steps">
-                    <li>Pilih spesifikasi VPS yang diinginkan</li>
-                    <li>Hubungi admin via WhatsApp</li>
-                    <li>Konfirmasi pembayaran</li>
-                    <li>VPS akan diaktifkan dalam 1-2 jam</li>
-                </ol>
+        <!-- Produk Populer -->
+        <h2 class="section-title">Produk Populer</h2>
+        <div class="products">
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 5">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Headphone Wireless Noise Cancelling</h3>
+                    <div class="product-price">Rp 799.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
             </div>
             
-            <button class="btn" onclick="orderProduct('VPS Premium')">Hubungi Admin</button>
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 6">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Smart Watch Fitness Tracker</h3>
+                    <div class="product-price">Rp 550.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 7">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Kamera Mirrorless 24MP</h3>
+                    <div class="product-price">Rp 4.299.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="product">
+                <div class="product-img">
+                    <img src="https://via.placeholder.com/250x200" alt="Produk 8">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">Set Peralatan Masak 10 Pcs</h3>
+                    <div class="product-price">Rp 650.000</div>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                    <div class="product-actions">
+                        <button class="add-to-cart">Tambah Keranjang</button>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </main>
     
-    <!-- Modal Panel Pterodactyl -->
-    <div class="modal pterodactyl-modal" id="pterodactyl-modal">
-        <div class="modal-content">
-            <div class="close-btn" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="modal-icon">
-                <i class="fas fa-dragon"></i>
-            </div>
-            <h2 class="modal-title">Panel Pterodactyl</h2>
-            <p class="modal-description">Pilih kapasitas RAM untuk Panel Pterodactyl sesuai kebutuhan game server Anda.</p>
-            
-            <div class="ram-list">
-                <h3>Pilihan RAM yang Tersedia:</h3>
-                <div class="ram-option">
-                    <span class="ram-size">1GB</span>
-                    <span class="ram-price">Rp 15.000/bulan</span>
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Tentang MyStore</h3>
+                    <p>MyStore adalah toko online terpercaya yang menyediakan berbagai produk berkualitas dengan harga terjangkau. Kami berkomitmen untuk memberikan pengalaman berbelanja yang terbaik.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
                 </div>
-                <div class="ram-option">
-                    <span class="ram-size">2GB</span>
-                    <span class="ram-price">Rp 25.000/bulan</span>
+                
+                <div class="footer-column">
+                    <h3>Kategori</h3>
+                    <ul>
+                        <li><a href="#">Elektronik</a></li>
+                        <li><a href="#">Fashion Pria</a></li>
+                        <li><a href="#">Fashion Wanita</a></li>
+                        <li><a href="#">Perlengkapan Rumah</a></li>
+                        <li><a href="#">Olahraga & Hobi</a></li>
+                    </ul>
                 </div>
-                <div class="ram-option">
-                    <span class="ram-size">4GB</span>
-                    <span class="ram-price">Rp 45.000/bulan</span>
+                
+                <div class="footer-column">
+                    <h3>Bantuan</h3>
+                    <ul>
+                        <li><a href="#">Cara Berbelanja</a></li>
+                        <li><a href="#">Pembayaran</a></li>
+                        <li><a href="#">Pengiriman</a></li>
+                        <li><a href="#">Pengembalian</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
                 </div>
-                <div class="ram-option">
-                    <span class="ram-size">8GB</span>
-                    <span class="ram-price">Rp 85.000/bulan</span>
-                </div>
-                <div class="ram-option">
-                    <span class="ram-size">16GB</span>
-                    <span class="ram-price">Rp 150.000/bulan</span>
-                </div>
-                <div class="ram-option">
-                    <span class="ram-size">32GB</span>
-                    <span class="ram-price">Rp 280.000/bulan</span>
-                </div>
-                <div class="ram-option">
-                    <span class="ram-size">64GB</span>
-                    <span class="ram-price">Rp 500.000/bulan</span>
-                </div>
-                <div class="ram-option">
-                    <span class="ram-size">128GB</span>
-                    <span class="ram-price">Rp 900.000/bulan</span>
-                </div>
-                <div class="ram-option">
-                    <span class="ram-size">Unlimited</span>
-                    <span class="ram-price">Custom Price</span>
+                
+                <div class="footer-column">
+                    <h3>Kontak</h3>
+                    <ul>
+                        <li><i class="fas fa-map-marker-alt"></i> Jl. Contoh No. 123, Jakarta</li>
+                        <li><i class="fas fa-phone"></i> +62 123 4567 890</li>
+                        <li><i class="fas fa-envelope"></i> info@mystore.com</li>
+                    </ul>
                 </div>
             </div>
             
-            <div class="order-info">
-                <h3>Cara Order Panel Pterodactyl:</h3>
-                <ol class="order-steps">
-                    <li>Pilih kapasitas RAM yang diinginkan dari list di atas</li>
-                    <li>Hubungi admin via WhatsApp</li>
-                    <li>Konfirmasi spesifikasi dan pembayaran</li>
-                    <li>Panel akan diinstall dan dikonfigurasi</li>
-                </ol>
+            <div class="footer-bottom">
+                <p>&copy; 2023 MyStore. All Rights Reserved.</p>
             </div>
-            
-            <button class="btn" onclick="orderProduct('Panel Pterodactyl')">Hubungi Admin</button>
         </div>
-    </div>
+    </footer>
     
-    <div class="modal jasarun-modal" id="jasarun-modal">
-        <div class="modal-content">
-            <div class="close-btn" onclick="closeModal()">
-                <i class="fas fa-times"></i>
-            </div>
-            <div class="modal-icon">
-                <i class="fas fa-rocket"></i>
-            </div>
-            <h2 class="modal-title">Jasa Run Bot</h2>
-            <p class="modal-description">Jasa running bot profesional dengan garansi uptime dan support teknis untuk kebutuhan automation Anda.</p>
-            
-            <div class="order-info">
-                <h3>Cara Order Jasa Run:</h3>
-                <ol class="order-steps">
-                    <li>Jelaskan kebutuhan bot Anda</li>
-                    <li>Diskusikan spesifikasi dengan admin</li>
-                    <li>Konfirmasi harga dan pembayaran</li>
-                    <li>Bot akan dijalankan dan dimonitor</li>
-                </ol>
-            </div>
-            
-            <button class="btn" onclick="orderProduct('Jasa Run Bot')">Hubungi Admin</button>
-        </div>
-    </div>
-    
-    <div class="notification" id="notification">Mengarahkan ke WhatsApp...</div>
-
     <script>
-        // Create stars background
-        function createStars() {
-            const starsContainer = document.getElementById('stars');
-            const starsCount = 150;
-            
-            for (let i = 0; i < starsCount; i++) {
-                const star = document.createElement('div');
-                star.classList.add('star');
-                
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const size = Math.random() * 2 + 1;
-                const duration = Math.random() * 4 + 2;
-                const delay = Math.random() * 5;
-                
-                star.style.left = `${posX}%`;
-                star.style.top = `${posY}%`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.setProperty('--duration', `${duration}s`);
-                star.style.setProperty('--delay', `${delay}s`);
-                
-                starsContainer.appendChild(star);
-            }
-        }
-        
-        // Modal functions
-        function showModal(product) {
-            const modal = document.getElementById(`${product}-modal`);
-            modal.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-        
-        function closeModal() {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => modal.classList.remove('active'));
-            document.body.style.overflow = 'auto';
-        }
-        
-        // Order product function
-        function orderProduct(productName) {
-            const phoneNumber = "6285850539404";
-            const message = `Halo Admin Oscar Store, saya ingin order ${productName}. Bisa info lebih lanjut?`;
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
-            
-            showNotification();
-            
-            setTimeout(() => {
-                window.open(whatsappUrl, '_blank');
-            }, 1000);
-        }
-        
-        function showNotification() {
-            const notification = document.getElementById('notification');
-            notification.classList.add('show');
-            
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 2000);
-        }
-        
-        // Close modal when clicking outside
-        window.addEventListener('click', (e) => {
-            const modals = document.querySelectorAll('.modal');
-            modals.forEach(modal => {
-                if (e.target === modal) {
-                    closeModal();
-                }
-            });
-        });
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createStars();
-            
-            // Add 3D tilt effect to cards
-            const cards = document.querySelectorAll('.product-card');
-            cards.forEach(card => {
-                card.addEventListener('mousemove', (e) => {
-                    const cardRect = card.getBoundingClientRect();
-                    const x = e.clientX - cardRect.left;
-                    const y = e.clientY - cardRect.top;
-                    
-                    const centerX = cardRect.width / 2;
-                    const centerY = cardRect.height / 2;
-                    
-                    const rotateY = (x - centerX) / 25;
-                    const rotateX = (centerY - y) / 25;
-                    
-                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.03, 1.03, 1.03)`;
+        // Simple JavaScript untuk interaksi
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tambah ke keranjang
+            const addToCartButtons = document.querySelectorAll('.add-to-cart');
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    alert('Produk berhasil ditambahkan ke keranjang!');
                 });
-                
-                card.addEventListener('mouseleave', () => {
-                    card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
+            });
+            
+            // Animasi scroll untuk navigasi
+            const navLinks = document.querySelectorAll('nav a');
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if(targetId !== '#') {
+                        const targetElement = document.querySelector(targetId);
+                        if(targetElement) {
+                            window.scrollTo({
+                                top: targetElement.offsetTop - 100,
+                                behavior: 'smooth'
+                            });
+                        }
+                    }
                 });
             });
         });
