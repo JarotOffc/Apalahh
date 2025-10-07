@@ -233,7 +233,7 @@
         }
 
         .vps .product-icon { background: linear-gradient(45deg, #00d1e5, #00aed6); }
-        .panel .product-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
+        .pterodactyl .product-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
         .jasarun .product-icon { background: linear-gradient(45deg, #f9a825, #ffb74d); }
 
         .product-card:hover .product-icon {
@@ -342,7 +342,7 @@
             background: linear-gradient(145deg, rgba(26, 23, 53, 0.95), rgba(33, 29, 70, 0.98));
             border-radius: 25px;
             width: 90%;
-            max-width: 500px;
+            max-width: 600px;
             padding: 40px;
             text-align: center;
             position: relative;
@@ -370,7 +370,7 @@
         }
 
         .vps-modal .modal-icon { background: linear-gradient(45deg, #00d1e5, #00aed6); }
-        .panel-modal .modal-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
+        .pterodactyl-modal .modal-icon { background: linear-gradient(45deg, #4c3f91, #6a5acd); }
         .jasarun-modal .modal-icon { background: linear-gradient(45deg, #f9a825, #ffb74d); }
 
         .modal-title {
@@ -384,6 +384,46 @@
             font-size: 1.1rem;
             margin-bottom: 25px;
             line-height: 1.6;
+        }
+
+        .ram-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .ram-option {
+            background: rgba(157, 78, 221, 0.1);
+            border: 2px solid rgba(157, 78, 221, 0.3);
+            border-radius: 15px;
+            padding: 15px 10px;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
+        }
+
+        .ram-option:hover {
+            background: rgba(157, 78, 221, 0.2);
+            border-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .ram-option.selected {
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
+        }
+
+        .ram-size {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .ram-price {
+            font-size: 0.9rem;
+            opacity: 0.8;
         }
 
         .order-info {
@@ -497,6 +537,11 @@
             .product-title {
                 font-size: 1.6rem;
             }
+
+            .ram-options {
+                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+                gap: 10px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -525,6 +570,7 @@
             
             .modal-content {
                 padding: 30px 20px;
+                max-width: 95%;
             }
             
             .modal-icon {
@@ -535,6 +581,10 @@
             
             .modal-title {
                 font-size: 1.8rem;
+            }
+
+            .ram-options {
+                grid-template-columns: repeat(3, 1fr);
             }
         }
 
@@ -563,6 +613,14 @@
                 padding: 10px 25px;
                 font-size: 0.9rem;
             }
+
+            .ram-options {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .ram-size {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
@@ -573,7 +631,6 @@
     <div class="container">
         <header>
             <div class="profile-container">
-                <!-- Ganti URL gambar di bawah ini dengan foto profil Anda -->
                 <div class="profile-avatar">
                     <img src="https://files.catbox.moe/h3nu9c.jpg" alt="Profile Picture" style="width: 160%; height: 160%; object-fit: cover; border-radius: 200%;">
                 </div>
@@ -600,18 +657,18 @@
                 <button class="btn">Order Sekarang</button>
             </div>
             
-            <!-- Panel -->
-            <div class="product-card panel" onclick="showModal('panel')">
+            <!-- Panel Pterodactyl -->
+            <div class="product-card pterodactyl" onclick="showModal('pterodactyl')">
                 <div class="product-icon">
-                    <i class="fas fa-cogs"></i>
+                    <i class="fas fa-dragon"></i>
                 </div>
-                <h3 class="product-title">Control Panel</h3>
-                <p class="product-desc">Panel kontrol lengkap untuk mengelola hosting dan website Anda</p>
+                <h3 class="product-title">Panel Pterodactyl</h3>
+                <p class="product-desc">Game server control panel dengan fitur lengkap dan mudah digunakan</p>
                 <ul class="product-features">
+                    <li>Open Source & Free</li>
                     <li>User-Friendly Interface</li>
-                    <li>One-Click Installations</li>
-                    <li>Advanced Security Features</li>
-                    <li>Real-time Monitoring</li>
+                    <li>Multi-Game Support</li>
+                    <li>Advanced Security</li>
                 </ul>
                 <button class="btn">Order Sekarang</button>
             </div>
@@ -664,28 +721,33 @@
         </div>
     </div>
     
-    <div class="modal panel-modal" id="panel-modal">
+    <!-- Modal Panel Pterodactyl -->
+    <div class="modal pterodactyl-modal" id="pterodactyl-modal">
         <div class="modal-content">
             <div class="close-btn" onclick="closeModal()">
                 <i class="fas fa-times"></i>
             </div>
             <div class="modal-icon">
-                <i class="fas fa-cogs"></i>
+                <i class="fas fa-dragon"></i>
             </div>
-            <h2 class="modal-title">Control Panel</h2>
-            <p class="modal-description">Dapatkan control panel lengkap dengan fitur terbaru untuk mengelola hosting dan website Anda dengan mudah.</p>
+            <h2 class="modal-title">Panel Pterodactyl</h2>
+            <p class="modal-description">Pilih paket RAM untuk Panel Pterodactyl sesuai kebutuhan game server Anda.</p>
+            
+            <div class="ram-options" id="ramOptions">
+                <!-- RAM options will be generated by JavaScript -->
+            </div>
             
             <div class="order-info">
-                <h3>Cara Order Panel:</h3>
+                <h3>Cara Order Panel Pterodactyl:</h3>
                 <ol class="order-steps">
-                    <li>Tentukan kebutuhan panel Anda</li>
-                    <li>Hubungi admin untuk konsultasi</li>
-                    <li>Lakukan pembayaran</li>
+                    <li>Pilih kapasitas RAM yang diinginkan</li>
+                    <li>Hubungi admin via WhatsApp</li>
+                    <li>Konfirmasi spesifikasi dan pembayaran</li>
                     <li>Panel akan diinstall dan dikonfigurasi</li>
                 </ol>
             </div>
             
-            <button class="btn" onclick="orderProduct('Control Panel')">Hubungi Admin</button>
+            <button class="btn" onclick="orderPterodactyl()" id="orderPterodactylBtn">Hubungi Admin</button>
         </div>
     </div>
     
@@ -717,6 +779,21 @@
     <div class="notification" id="notification">Mengarahkan ke WhatsApp...</div>
 
     <script>
+        // RAM options data
+        const ramOptions = [
+            { size: '1GB', price: 'Rp 15.000/bulan' },
+            { size: '2GB', price: 'Rp 25.000/bulan' },
+            { size: '4GB', price: 'Rp 45.000/bulan' },
+            { size: '8GB', price: 'Rp 85.000/bulan' },
+            { size: '16GB', price: 'Rp 150.000/bulan' },
+            { size: '32GB', price: 'Rp 280.000/bulan' },
+            { size: '64GB', price: 'Rp 500.000/bulan' },
+            { size: '128GB', price: 'Rp 900.000/bulan' },
+            { size: 'Unlimited', price: 'Custom Price' }
+        ];
+
+        let selectedRam = '';
+
         // Create stars background
         function createStars() {
             const starsContainer = document.getElementById('stars');
@@ -726,17 +803,10 @@
                 const star = document.createElement('div');
                 star.classList.add('star');
                 
-                // Random position
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
-                
-                // Random size (1-3px)
                 const size = Math.random() * 2 + 1;
-                
-                // Random animation duration (2-6s)
                 const duration = Math.random() * 4 + 2;
-                
-                // Random delay (0-5s)
                 const delay = Math.random() * 5;
                 
                 star.style.left = `${posX}%`;
@@ -749,12 +819,46 @@
                 starsContainer.appendChild(star);
             }
         }
+
+        // Generate RAM options
+        function generateRamOptions() {
+            const ramContainer = document.getElementById('ramOptions');
+            ramContainer.innerHTML = '';
+            
+            ramOptions.forEach(ram => {
+                const ramOption = document.createElement('div');
+                ramOption.className = 'ram-option';
+                ramOption.innerHTML = `
+                    <div class="ram-size">${ram.size}</div>
+                    <div class="ram-price">${ram.price}</div>
+                `;
+                
+                ramOption.addEventListener('click', () => {
+                    // Remove selected class from all options
+                    document.querySelectorAll('.ram-option').forEach(opt => {
+                        opt.classList.remove('selected');
+                    });
+                    
+                    // Add selected class to clicked option
+                    ramOption.classList.add('selected');
+                    selectedRam = ram.size;
+                });
+                
+                ramContainer.appendChild(ramOption);
+            });
+        }
         
         // Modal functions
         function showModal(product) {
             const modal = document.getElementById(`${product}-modal`);
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Generate RAM options when pterodactyl modal is shown
+            if (product === 'pterodactyl') {
+                generateRamOptions();
+                selectedRam = ''; // Reset selection
+            }
         }
         
         function closeModal() {
@@ -769,10 +873,27 @@
             const message = `Halo Admin Oscar Store, saya ingin order ${productName}. Bisa info lebih lanjut?`;
             const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
             
-            // Show notification
             showNotification();
             
-            // Redirect to WhatsApp after short delay
+            setTimeout(() => {
+                window.open(whatsappUrl, '_blank');
+            }, 1000);
+        }
+
+        // Order Pterodactyl function
+        function orderPterodactyl() {
+            if (!selectedRam) {
+                alert('Silakan pilih kapasitas RAM terlebih dahulu!');
+                return;
+            }
+
+            const phoneNumber = "6285850539404";
+            const ramPrice = ramOptions.find(ram => ram.size === selectedRam)?.price || 'Custom Price';
+            const message = `Halo Admin Oscar Store, saya ingin order Panel Pterodactyl dengan spesifikasi:\nRAM: ${selectedRam}\nHarga: ${ramPrice}\n\nBisa info lebih lanjut?`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+            
+            showNotification();
+            
             setTimeout(() => {
                 window.open(whatsappUrl, '_blank');
             }, 1000);
